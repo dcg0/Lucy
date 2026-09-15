@@ -31,9 +31,19 @@
  pip install requests pyttsx3 opencv-python
  # 6. Arrancar servidor
  ollama serve
+ ## 📲 Descargar APK
 
+### Versión actual: **v1.0**
+👉 **[Descargar Lucy.apk desde Releases](https://github.com/dcg0/Lucy/releases/tag/v1.0)**
 
- Archivo	Descripción
+> 🐙Si no ves el enlace, ya está publicado arriba en la sección "Releases"
+
+### Instalación:
+1. Descarga el archivo
+2. Permite instalar de fuentes desconocidas si te lo pide
+3. Toca el archivo → **Instalar**
+4. ¡Abre y disfruta! 💜
+5. Archivo	Descripción
 Imagen de portada ✅
 Todo el código listo para descomprimir
 Este archivo
