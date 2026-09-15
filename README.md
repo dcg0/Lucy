@@ -1,5 +1,6 @@
 # Lucy
 🔗https://dcg0.github.io/Lucy/
+
 <p align="center">
    <img src="portadadelucy.png" alt="Lucy — Tu asistente virtual" width="100%">
  </p>
@@ -69,6 +70,7 @@ Este archivo
 
 ---
 
+🔗https://dcg0.github.io/Lucy/
 ## 📌 Nota sobre la voz
 Lucy no trae una voz fija. Ve a **Configuración → Accesibilidad → Texto a voz** en tu celular y descarga la voz que más te guste. Recomendada: **Español (México)**.
 
