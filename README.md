@@ -48,3 +48,39 @@ Imagen de portada ✅
 Todo el código listo para descomprimir
 Este archivo
 #AUTOR  DC-LABORATORIO 
+## 📲 Descargar APK
+
+👉 **[Descargar Lucy v1.0](https://github.com/dcg0/Lucy/releases/download/v1.0/Lucy.apk)**
+
+### 📷 Escanea con tu celular:
+
+<p align="center">
+  <img src="qr_lucy.png" alt="QR Descargar Lucy" width="220">
+</p>
+
+> 💡 Si no se ve el QR: descarga directa desde **[Releases](https://github.com/dcg0/Lucy/releases/tag/v1.0)**
+
+### Cómo instalar:
+1. Descarga el archivo `.apk`
+2. Permite **"Instalar apps de fuentes desconocidas"** si te lo pide
+3. Toca el archivo → **Instalar**
+4. ¡Abre y disfruta! 💜
+
+---
+
+## 📌 Nota sobre la voz
+Lucy no trae una voz fija. Ve a **Configuración → Accesibilidad → Texto a voz** en tu celular y descarga la voz que más te guste. Recomendada: **Español (México)**.
+
+---
+
+## ⚙️ Requisitos
+- 📱 Android 9 o superior
+- 💾 500 MB libres
+- 🧠 Modelo `qwen2:0.5b` (~350 MB)
+
+---
+
+<p align="center">
+  <b>💜 Lucy — Tu asistente, siempre contigo 💜</b><br>
+  <sub>D-C laboratory © 2026</sub>
+</p>
