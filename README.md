@@ -9,7 +9,7 @@
  ## 💜 ¿Qué es Lucy?
  Lucy es un asistente virtual con personalidad única, diseñada para funcionar **localmente en tu celular**. Te ayuda con programación, tareas técnicas, control de dispositivos y mucho más — respetando tu privacidad.
  ---
- ## Descarga Ⓜ️anus y se integra sola
+ ## Descarga Ⓜ️Manus y se integra sola
  ## ✨ Características
  - 🧠 **IA local** con Ollama — no necesita internet
  - 🎙️ **Voz a tu gusto** — descarga la voz que prefieras
