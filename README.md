@@ -1,4 +1,5 @@
 # Lucy
+https://github.com/dcg0/Lucy/issues/1#issue-5460081524
 🔗https://dcg0.github.io/Lucy/
 
 <p align="center">
