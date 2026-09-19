@@ -1,0 +1,58 @@
+{
+  "name": "lucy-dc-desktop",
+  "version": "1.4.0",
+  "description": "Lucy-DC desktop con Hermes híbrido",
+  "main": "main.js",
+  "author": "D-C Laboratory",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "dist:linux": "electron-builder --linux AppImage",
+    "dist:windows": "electron-builder --win portable",
+    "dist:all": "electron-builder --linux AppImage --win portable"
+  },
+  "devDependencies": {
+    "electron": "31.7.7",
+    "electron-builder": "25.1.8"
+  },
+  "build": {
+    "appId": "com.dclaboratory.lucy.desktop",
+    "productName": "Lucy-DC",
+    "artifactName": "Lucy-DC-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "lucy.html",
+      "*.mp4",
+      "assets/**/*"
+    ],
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Utility"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "signAndEditExecutable": false
+    },
+    "portable": {
+      "artifactName": "Lucy-DC-${version}-Windows-x64.exe"
+    },
+    "icon": "assets/portada-lucy.png"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dcg0/Lucy-PC.git"
+  }
+}
