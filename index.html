@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucy | D-C Laboratory</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #050510;
+            color: #e0e7ff;
+            min-height: 100vh;
+            background-image: url('cy.jpg');
+            background-size: cover;
+            background-position: center top;
+            background-attachment: fixed;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 50px 20px 80px;
+            text-align: center;
+        }
+
+        .lu-img {
+            max-width: 260px;
+            width: 70%;
+            border-radius: 16px;
+            border: 2px solid rgba(96, 165, 250, 0.6);
+            box-shadow: 0 0 30px rgba(96, 165, 250, 0.5),
+                        inset 0 0 10px rgba(96, 165, 250, 0.2);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 6px;
+            color: #a5b4fc;
+            text-shadow: 0 0 8px #60a5fa,
+                         0 0 20px #3b82f6,
+                         0 0 35px #1d4ed8;
+            margin-bottom: 8px;
+        }
+
+        .subtitulo {
+            color: #93c5fd;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            opacity: 0.85;
+        }
+
+        .version {
+            display: inline-block;
+            padding: 6px 20px;
+            border: 1px solid rgba(96, 165, 250, 0.4);
+            border-radius: 30px;
+            color: #93c5fd;
+            font-size: 0.85rem;
+            margin-bottom: 50px;
+            box-shadow: 0 0 12px rgba(96, 165, 250, 0.2);
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: #c7d2fe;
+            margin: 45px 0 15px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 6px rgba(100, 116, 255, 0.5);
+        }
+
+        p {
+            color: #dbeafe;
+            line-height: 1.8;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .qr-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 12px;
+            border: 2px solid rgba(96, 165, 250, 0.5);
+            box-shadow: 0 0 25px rgba(96, 165, 250, 0.4);
+            margin: 20px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 14px 36px;
+            background: linear-gradient(135deg, #9333ea, #c026d3);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            box-shadow: 0 0 14px #e9d5ff, 0 0 34px #c026d3, 0 0 60px #9333ea;
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 22px #f3e8ff, 0 0 55px #d946ef, 0 0 90px #a855f7;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .feature-item h3 {
+            color: #a5b4fc;
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            color: #bfdbfe;
+            opacity: 0.8;
+        }
+
+        .instalacion {
+            text-align: left;
+            max-width: 480px;
+            margin: 25px auto 0;
+        }
+
+        .instalacion p {
+            margin: 10px 0;
+        }
+
+        footer {
+            margin-top: 60px;
+            color: #7dd3fc;
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
+        .separador {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.4), transparent);
+            margin: 40px 0;
+        }
+
+        .titulo-seccion {
+            font-size: 1.4rem;
+            color: #c7d2fe;
+            letter-spacing: 2px;
+            text-shadow: 0 0 6px rgba(100, 116, 255, 0.5);
+            margin-bottom: 20px;
+        }
+
+        .grid-servicios {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .tarjeta-servicio {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .tarjeta-servicio .icono {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .tarjeta-servicio h3 {
+            color: #a5b4fc;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .tarjeta-servicio p {
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        .btn-llamar {
+            display: inline-block;
+            padding: 13px 32px;
+            background: linear-gradient(135deg, #9333ea, #c026d3);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 12px #e9d5ff, 0 0 30px #c026d3, 0 0 55px #9333ea;
+            transition: 0.3s ease;
+        }
+
+        .btn-llamar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px #f3e8ff, 0 0 50px #d946ef, 0 0 85px #a855f7;
+        }
+</head>
+<body>
+    <div class="container">
+        <img src="lu.jpg" alt="Lucy" class="lu-img">
+        
+        <h1>Lucy</h1>
+        <p class="subtitulo">Asistente Virtual Personal · D-C Laboratory</p>
+        <span class="version">v1.0</span>
+
+        <div class="panel-descarga">
+            <h2>📲 Descargar Lucy</h2>
+            <p>Escanea con tu celular para descargar la APK</p>
+            <img src="qr_lucy.png" alt="Código QR de descarga" class="qr-img">
+            <p style="font-size: 0.9rem; opacity: 0.7;">O toca el botón de abajo</p>
+            <a href="https://files.manuscdn.com/user_upload_by_module/session_file/310519663970716887/LrpcRKrqnqwKzXpx.apk1" class="btn">⬇️ Descargar Lucy APK</a>
+        </div>
+
+<div class="separador"></div>
+
+<div class="seccion-servicios">
+    <h2 class="titulo-seccion">DESCARGAS</h2>
+    <p style="margin-bottom: 20px;">Elige tu plataforma:</p>
+    <div class="grid-servicios">
+        <div class="tarjeta-servicio android">
+            <span class="icono">📱</span>
+            <h3>ANDROID</h3>
+            <p>Aplicación móvil con IA integrada. Descarga el APK.</p>
+            <a href="https://files.manuscdn.com/user_upload_by_module/session_file/310519663970716887/LrpcRKrqnqwKzXpx.apk1" download class="btn-llamar">⬇️ Descargar APK</a>
+        </div>
+        <div class="tarjeta-servicio">
+            <span class="icono">💻</span>
+            <h3>PC</h3>
+            <p>Cliente de escritorio con IA integrada.</p>
+            <a href="https://github.com/dcg0/Lucy-PC" class="btn-llamar">🔗 Ver en GitHub</a>
+        </div>
+    </div>
+</div>
+        <div style="margin:28px auto;padding:20px;border:1px solid rgba(114,221,255,.35);border-radius:16px;background:rgba(3,16,35,.68);box-shadow:0 0 24px rgba(44,160,255,.16);">
+            <h2 style="margin:0 0 10px;">🎬 Probar interfaz inteligente</h2>
+            <p>Lucy integra las emociones y los videos del repositorio con transición segura, precarga y respaldo visual.</p>
+            <a href="lucy.html" class="btn">Abrir interfaz de Lucy</a>
+        </div>
+
+        <h2>✨ ¿Qué es Lucy?</h2>
+        <p>Lucy es tu asistente virtual con personalidad única — seria, elegante e inteligente. Funciona localmente con Ollama en tu celular, protegiendo tu privacidad. Te ayuda con programación, tareas técnicas, conexión con dispositivos como ELM327 y mucho más.</p>
+
+        <h2>🚀 Características</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <h3>🧠 IA Local</h3>
+                <p>Sin internet — todo en tu dispositivo</p>
+            </div>
+            <div class="feature-item">
+                <h3>🎙️ Voz a tu gusto</h3>
+                <p>Elige la voz que prefieras</p>
+            </div>
+            <div class="feature-item">
+                <h3>📱 Android 9+</h3>
+                <p>Optimizada para tu celular</p>
+            </div>
+            <div class="feature-item">
+                <h3>🔒 Privacidad</h3>
+                <p>Tus datos nunca salen de tu teléfono</p>
+            </div>
+        </div>
+
+        <h2>📝 Instalación</h2>
+        <div class="instalacion">
+            <p><strong>1.</strong> Descarga <strong>Lucy.apk</strong> desde el botón o el QR</p>
+            <p><strong>2.</strong> Permite instalar aplicaciones de fuentes desconocidas</p>
+            <p><strong>3.</strong> Toca el archivo → <strong>Instalar</strong></p>
+            <p><strong>4.</strong> ¡Abre Lucy y disfruta! 💜</p>
+        </div>
+
+        <footer>
+            © 2026 D-C Laboratory · Lucy — Tu asistente,🔗https://dcos.io/
+        </footer>
+    </div>
+</body>
+</html>
