@@ -7,7 +7,7 @@
 <style>
 :root{color-scheme:dark;--bg:#050711;--panel:#0b1120;--text:#e7edf7;--muted:#9aa8bb;--cyan:#62e6ff;--purple:#a978ff}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text)}
-body{display:flex;justify-content:center;padding:48px 18px}.page{width:min(760px,100%);text-align:center}.brand{font-size:clamp(38px,8vw,72px);font-weight:700;letter-spacing:.16em;margin:8px 0 10px;color:var(--text)}.subtitle{margin:0 auto 38px;color:var(--muted);font-size:16px;line-height:1.6}.section{margin:26px 0;padding:26px 22px;border:1px solid #1d2a40;border-radius:18px;background:rgba(11,17,32,.82)}.section h2{font-size:21px;font-weight:600;margin:0 0 9px}.section p{color:var(--muted);line-height:1.6;margin:0 auto 20px}.buttons{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border:1px solid var(--cyan);border-radius:12px;background:#0b1b2a;color:#eaffff;text-decoration:none;font-weight:700;transition:transform .2s,box-shadow .2s,background .2s;box-shadow:0 0 8px rgba(98,230,255,.45),inset 0 0 12px rgba(98,230,255,.08)}.btn:hover{transform:translateY(-2px);background:#102d42;box-shadow:0 0 12px var(--cyan),0 0 28px rgba(169,120,255,.48),inset 0 0 16px rgba(98,230,255,.16)}.btn.primary{border-color:var(--purple);box-shadow:0 0 9px rgba(169,120,255,.65),inset 0 0 13px rgba(169,120,255,.12)}.play{font-size:21px;min-width:220px;min-height:62px;border-radius:16px;letter-spacing:.08em}.music-note{color:var(--muted);font-size:13px;margin-top:12px}.btn.primary:hover{box-shadow:0 0 14px var(--purple),0 0 32px rgba(98,230,255,.48)}.meta{font-size:13px;color:#718198;margin-top:16px}footer{margin-top:34px;color:#718198;font-size:13px}
+body{display:flex;justify-content:center;padding:48px 18px}.page{width:min(760px,100%);text-align:center}.brand{font-size:clamp(38px,8vw,72px);font-weight:700;letter-spacing:.16em;margin:8px 0 10px;color:var(--text)}.subtitle{margin:0 auto 38px;color:var(--muted);font-size:16px;line-height:1.6}.section{margin:26px 0;padding:26px 22px;border:1px solid #1d2a40;border-radius:18px;background:rgba(11,17,32,.82)}.section h2{font-size:21px;font-weight:600;margin:0 0 9px}.section p{color:var(--muted);line-height:1.6;margin:0 auto 20px}.buttons{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border:1px solid var(--cyan);border-radius:12px;background:#0b1b2a;color:#eaffff;text-decoration:none;font-weight:700;transition:transform .2s,box-shadow .2s,background .2s;box-shadow:0 0 8px rgba(98,230,255,.45),inset 0 0 12px rgba(98,230,255,.08)}.btn:hover{transform:translateY(-2px);background:#102d42;box-shadow:0 0 12px var(--cyan),0 0 28px rgba(169,120,255,.48),inset 0 0 16px rgba(98,230,255,.16)}.btn.primary{border-color:var(--purple);box-shadow:0 0 9px rgba(169,120,255,.65),inset 0 0 13px rgba(169,120,255,.12)}.play{font-size:21px;min-width:220px;min-height:62px;border-radius:16px;letter-spacing:.08em}.music-note{color:var(--muted);font-size:13px;margin-top:12px}audio{display:none}.btn.primary:hover{box-shadow:0 0 14px var(--purple),0 0 32px rgba(98,230,255,.48)}.meta{font-size:13px;color:#718198;margin-top:16px}footer{margin-top:34px;color:#718198;font-size:13px}
 </style>
 </head>
 <body>
@@ -17,9 +17,10 @@ body{display:flex;justify-content:center;padding:48px 18px}.page{width:min(760px
 
   <section class="section">
     <h2>Música electrónica</h2>
-    <p>Cyberpunk / Dark Synthwave — “Oblivion”, seleccionada para combinar con la interfaz de Lucy.</p>
-    <div class="buttons"><a class="btn primary play" href="https://www.youtube.com/watch?v=2-wKcIkElIc" target="_blank" rel="noopener">▶ PLAY</a></div>
-    <p class="music-note">Pista royalty-free de White Bat Audio · Crédito: Karl Casey @ White Bat Audio.</p>
+    <p>Pista electrónica original creada para combinar con la interfaz de Lucy.</p>
+    <audio id="lucyMusic" preload="metadata" src="lucy-electronic-original.mp3"></audio>
+    <div class="buttons"><button class="btn primary play" id="playMusic" type="button">▶ PLAY</button></div>
+    <p class="music-note">Autor: DC-LABORATORY · Música original de Lucy.</p>
   </section>
 
   <section class="section">
@@ -62,5 +63,10 @@ body{display:flex;justify-content:center;padding:48px 18px}.page{width:min(760px
   <p class="meta">Lucy 1.4.0 · D-C Laboratory</p>
   <footer>Solo los botones tienen iluminación visual.</footer>
 </main>
+<script>
+const music=document.getElementById('lucyMusic'),play=document.getElementById('playMusic');
+play.addEventListener('click',()=>{if(music.paused){music.play().then(()=>{play.textContent='❚❚ PAUSE'}).catch(()=>{});}else{music.pause();play.textContent='▶ PLAY';}});
+music.addEventListener('ended',()=>{play.textContent='▶ PLAY';});
+</script>
 </body>
 </html>
