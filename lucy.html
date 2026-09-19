@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Lucy · interfaz inteligente</title>
+<style>
+:root{color-scheme:dark;--cyan:#72ddff;--purple:#bf6cff;--panel:rgba(4,12,26,.78)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#020817;color:#fff;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+#stage{position:fixed;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 42%,#193f68 0,#07182e 42%,#020817 100%)}
+.video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .28s ease;z-index:1;background:transparent}.video.active{opacity:1}
+#fallback{position:absolute;inset:0;z-index:0;display:grid;place-items:center;text-align:center;background:radial-gradient(circle,rgba(63,183,255,.22),transparent 42%)}#fallback b{display:block;font-size:clamp(48px,16vw,104px);letter-spacing:.14em;color:var(--cyan);text-shadow:0 0 24px #168dd0}#fallback small{letter-spacing:.22em;color:#c4f3ff}#fallback.hide{display:none}
+.shade{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.6),transparent 38%,rgba(0,0,0,.38))}
+header{position:fixed;z-index:5;top:0;left:0;right:0;height:58px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.48);border-bottom:1px solid rgba(114,221,255,.22)}header h1{margin:0;color:var(--cyan);font-size:21px;letter-spacing:.18em}header button{position:absolute;left:14px;border:0;background:transparent;color:white;font-size:25px}
+#status{position:fixed;z-index:5;top:72px;right:15px;font-size:12px;color:#c7f5ff;text-shadow:0 1px 5px #000}.answer{position:fixed;z-index:5;left:50%;top:50%;transform:translate(-50%,-50%);width:min(84%,620px);text-align:center;font-size:clamp(20px,5vw,30px);line-height:1.45;text-shadow:0 2px 9px #000}
+.actions{position:fixed;z-index:5;left:0;right:0;bottom:94px;display:flex;justify-content:space-evenly}.actions button{border:0;background:rgba(5,15,30,.48);border-radius:50%;width:48px;height:48px;font-size:24px;cursor:pointer;box-shadow:0 0 14px rgba(73,190,255,.22)}
+.composer{position:fixed;z-index:5;left:14px;right:14px;bottom:22px;height:56px;display:flex;gap:10px;align-items:center;padding:0 10px 0 17px;border-radius:30px;background:var(--panel);border:1px solid rgba(114,221,255,.3)}.composer input{flex:1;min-width:0;background:none;border:0;outline:0;color:white;font-size:16px}.composer button{border:0;border-radius:50%;width:40px;height:40px;background:linear-gradient(135deg,#c000ff,#5b20ba);color:#fff;font-size:19px}
+#library{position:fixed;z-index:6;left:12px;right:12px;bottom:88px;display:flex;gap:7px;overflow:auto;padding:6px 0}.chip{flex:none;padding:7px 10px;border-radius:18px;border:1px solid rgba(114,221,255,.3);background:rgba(0,0,0,.45);color:#d8f8ff;font-size:12px}.chip:active{background:#175778}
+</style>
+</head>
+<body>
+<div id="stage"><div id="fallback"><div><b>LUCY</b><small>CONECTADA · LISTA</small></div></div><video id="videoA" class="video active" autoplay muted loop playsinline preload="auto"></video><video id="videoB" class="video" muted loop playsinline preload="auto"></video><div class="shade"></div></div>
+<header><button id="menu" aria-label="Abrir terminal">☰</button><h1>LUCY</h1></header><div id="status">● conectada · Hermes local</div><div id="answer" class="answer">¡Hola! Soy Lucy. ¿En qué puedo ayudarte hoy?</div>
+<div id="library" aria-label="Emociones"></div><div class="actions"><button data-emotion="feliz">♥</button><button data-emotion="pensando">⌁</button><button data-emotion="afirmando">✓</button><button data-emotion="trabajando">◈</button><button data-emotion="neutro">◉</button></div>
+<form class="composer" id="form"><input id="input" placeholder="Habla con Hermes..." autocomplete="off"><button aria-label="Enviar">➤</button></form>
+<script>
+const clips={
+  neutro:'lucy.mp4', feliz:'feliz.mp4', pensando:'pensando.mp4', afirmando:'afirmando.mp4', enojada:'enojada.mp4',
+  trabajando:'trabajando.mp4', trabajandoen:'trabajandoen.mp4', desorientada:'desorientada.mp4', conspiraciones:'conspiraciones.mp4',
+  idea:'idea.mp4', inventando:'inventando.mp4', jugando:'jugando.mp4', magia:'magia.mp4', nada:'nada.mp4', no:'no.mp4', puedeser:'puedeser.mp4', tenga:'tenga.mp4'
+};
+const labels={neutro:'neutra',feliz:'feliz',pensando:'pensando',afirmando:'afirmando',enojada:'enojada',trabajando:'trabajando',trabajandoen:'trabajando en',desorientada:'desorientada',conspiraciones:'conspiraciones',idea:'idea',inventando:'inventando',jugando:'jugando',magia:'magia',nada:'nada',no:'no',puedeser:'puede ser',tenga:'tenga'};
+const replies={feliz:'¡Claro que sí! Me encanta ayudarte.',pensando:'Déjame analizarlo con cuidado...',afirmando:'Confirmado. Voy a continuar.',enojada:'Voy a mantener la calma y revisar los datos.',trabajando:'Estoy trabajando en ello...',trabajandoen:'Sigo trabajando en tu solicitud.',desorientada:'Necesito ordenar la información antes de responder.',conspiraciones:'Estoy comparando las posibles conexiones.',idea:'Tengo una idea para resolverlo.',inventando:'Estoy construyendo una alternativa.',jugando:'Podemos explorar esto juntos.',magia:'Voy a intentar algo diferente.',nada:'No encontré nada concluyente todavía.',no:'No puedo confirmarlo aún.',puedeser:'Puede ser; necesito verificarlo.',tenga:'Ten en cuenta este punto.',neutro:'Entiendo. Dime más, por favor.'};
+const videoA=document.querySelector('#videoA'),videoB=document.querySelector('#videoB'),fallback=document.querySelector('#fallback'),answer=document.querySelector('#answer'),status=document.querySelector('#status');let active=videoA,standby=videoB,current='neutro',token=0;
+function printStatus(s){status.textContent='● conectada · '+s}function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function emotionFor(message){const m=message.toLowerCase();if(/hola|gracias|genial|excelente/.test(m))return'feliz';if(/no puedo|error|mal|enoja/.test(m))return'enojada';if(/idea|crear|diseña|inventa/.test(m))return'idea';if(/jugar|juego/.test(m))return'jugando';if(/conspira|conexión|relación/.test(m))return'conspiraciones';if(/trabaja|procesa|analiza|revisa/.test(m))return'trabajando';if(/sí|exacto|correcto|confirm/.test(m))return'afirmando';if(/cómo|por qué|qué|puedes/.test(m))return'pensando';return'neutro'}
+function switchClip(emotion){const wanted=clips[emotion]||clips.neutro;const myToken=++token;standby.oncanplay=()=>{if(myToken!==token)return;standby.play().catch(()=>{});standby.classList.add('active');active.classList.remove('active');const old=active;active=standby;standby=old;fallback.classList.add('hide');setTimeout(()=>{old.pause();old.removeAttribute('src');old.load()},300);printStatus(labels[emotion]||emotion)};standby.onerror=()=>{if(wanted!==clips.neutro){standby.src=clips.neutro;standby.load()}else{fallback.classList.remove('hide');printStatus('modo visual')}};standby.src=wanted;standby.load()}
+function setLucy(emotion,text){current=clips[emotion]?emotion:'neutro';answer.textContent=text||replies[current];switchClip(current)}
+const Hermes={memory:[],async ask(message){const emotion=emotionFor(message);const result={emotion,reply:replies[emotion]||replies.neutro};this.memory.push({message,...result,at:Date.now()});if(this.memory.length>8)this.memory.shift();return result}};window.Hermes=Hermes;
+function makeLibrary(){const lib=document.querySelector('#library');Object.keys(clips).forEach(emotion=>{const b=document.createElement('button');b.className='chip';b.textContent=labels[emotion];b.onclick=()=>setLucy(emotion,replies[emotion]);lib.appendChild(b)})}
+document.querySelectorAll('[data-emotion]').forEach(b=>b.onclick=()=>setLucy(b.dataset.emotion));document.querySelector('#form').onsubmit=async e=>{e.preventDefault();const input=document.querySelector('#input'),message=input.value.trim();if(!message)return;input.value='';setLucy('pensando','Estoy revisándolo...');const result=await Hermes.ask(message);setLucy(result.emotion,result.reply)};
+document.querySelector('#menu').onclick=()=>alert('Terminal administrativa disponible en la versión protegida de Lucy.');makeLibrary();videoA.src=clips.neutro;videoA.oncanplay=()=>{videoA.play().catch(()=>{});fallback.classList.add('hide')};videoA.onerror=()=>fallback.classList.remove('hide');videoA.load();
+</script>
+</body>
+</html>
