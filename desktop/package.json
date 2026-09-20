@@ -49,7 +49,7 @@
     "portable": {
       "artifactName": "Lucy-DC-${version}-Windows-x64.exe"
     },
-    "icon": "assets/portada-lucy.png"
+    "icon": "assets/lucy-icon.png"
   },
   "repository": {
     "type": "git",
