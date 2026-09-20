@@ -3,7 +3,7 @@ plugins { id 'com.android.application' }
 import java.util.Properties
 
 android { namespace 'com.dclaboratory.lucy'; compileSdk 35
-    defaultConfig { applicationId 'com.dclaboratory.lucy'; minSdk 23; targetSdk 35; versionCode 4; versionName '1.4.0' }
+    defaultConfig { applicationId 'com.dclaboratory.lucy'; minSdk 23; targetSdk 35; versionCode 4; versionName '1.4.1-fixed' }
     signingConfigs {
         release {
             def propsFile = rootProject.file('keystore.properties')
