@@ -37,7 +37,7 @@ https://github.com/dcg0/Lucy/issues/1#issue-5460081524
  ## 📲 Descargar APK
 
 ### Versión actual: **v1.4.1-fixed**
-👉 **[Descargar Lucy APK corregida](https://github.com/dcg0/Lucy/releases/download/v1.4.1/Lucy-1.4.1-fixed.apk)**
+👉 **[Descargar Lucy APK corregida](https://github.com/dcg0/Lucy/releases/download/v1.4.2/Lucy-1.4.2-fixed.apk)**
 
 > 🐙Si no ves el enlace, ya está publicado arriba en la sección "Releases"
 
@@ -53,7 +53,7 @@ Este archivo
 #AUTOR  DC-LABORATORIO 
 ## 📲 Descargar APK
 
-👉 **[Descargar Lucy 1.4.1-fixed](https://github.com/dcg0/Lucy/releases/download/v1.4.1/Lucy-1.4.1-fixed.apk)**
+👉 **[Descargar Lucy 1.4.2-fixed](https://github.com/dcg0/Lucy/releases/download/v1.4.2/Lucy-1.4.2-fixed.apk)**
 
 ### 📷 Escanea con tu celular:
 
