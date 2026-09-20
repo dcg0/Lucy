@@ -36,8 +36,8 @@ https://github.com/dcg0/Lucy/issues/1#issue-5460081524
  ollama serve
  ## 📲 Descargar APK
 
-### Versión actual: **v1.4.2-fixed**
-👉 **[Descargar Lucy APK corregida](https://github.com/dcg0/Lucy/releases/download/v1.4.2/Lucy-1.4.2-fixed.apk)**
+### Versión actual: **v1.4.3-fixed**
+👉 **[Descargar Lucy APK corregida](https://github.com/dcg0/Lucy/releases/download/v1.4.3/Lucy-1.4.3-fixed.apk)**
 
 > 🐙Si no ves el enlace, ya está publicado arriba en la sección "Releases"
 
@@ -53,7 +53,7 @@ Este archivo
 #AUTOR  DC-LABORATORIO 
 ## 📲 Descargar APK
 
-👉 **[Descargar Lucy 1.4.2-fixed](https://github.com/dcg0/Lucy/releases/download/v1.4.2/Lucy-1.4.2-fixed.apk)**
+👉 **[Descargar Lucy 1.4.3-fixed](https://github.com/dcg0/Lucy/releases/download/v1.4.3/Lucy-1.4.3-fixed.apk)**
 
 ### 📷 Escanea con tu celular:
 
@@ -61,7 +61,7 @@ Este archivo
   <img src="qr_lucy.png" alt="QR Descargar Lucy" width="220">
 </p>
 
-> 💡 Si no se ve el QR: descarga directa desde **[la release 1.4.2-fixed](https://github.com/dcg0/Lucy/releases/tag/v1.4.2)**
+> 💡 Si no se ve el QR: descarga directa desde **[la release 1.4.3-fixed](https://github.com/dcg0/Lucy/releases/tag/v1.4.3)**
 
 ### Cómo instalar:
 1. Descarga el archivo `.apk`
