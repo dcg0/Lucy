@@ -24,31 +24,35 @@ header{position:fixed;z-index:5;top:0;left:0;right:0;height:58px;display:flex;al
 <form class="composer" id="form"><input id="input" placeholder="Habla con Lucy..." autocomplete="off" aria-label="Mensaje para Lucy"><button id="send" type="submit" aria-label="Enviar mensaje">➤</button></form>
 <script>
 const clips={
-  neutro:'lucy.mp4', feliz:'feliz.mp4', pensando:'pensando.mp4', afirmando:'afirmando.mp4', enojada:'enojada.mp4',
-  trabajando:'trabajando.mp4', trabajandoen:'trabajandoen.mp4', desorientada:'desorientada.mp4', conspiraciones:'conspiraciones.mp4',
+  neutro:'lucy.mp4', feliz:'feliz.mp4', pensando:'pensando-remaster.mp4', afirmando:'afirmacion.mp4', enojada:'enojada-remaster.mp4',
+  explicando:'explicando.mp4', trabajando:'trabajando.mp4', trabajandoen:'trabajandoen.mp4', desorientada:'desorientada.mp4', conspiraciones:'conspiraciones.mp4',
   idea:'idea.mp4', inventando:'inventando.mp4', jugando:'jugando.mp4', magia:'magia.mp4', nada:'nada.mp4', no:'no.mp4', puedeser:'puedeser.mp4', tenga:'tenga.mp4'
 };
-const labels={neutro:'neutra',feliz:'feliz',pensando:'pensando',afirmando:'afirmando',enojada:'enojada',trabajando:'trabajando',trabajandoen:'trabajando en',desorientada:'desorientada',conspiraciones:'conspiraciones',idea:'idea',inventando:'inventando',jugando:'jugando',magia:'magia',nada:'nada',no:'no',puedeser:'puede ser',tenga:'tenga'};
-const replies={feliz:'¡Claro que sí! Me encanta ayudarte.',pensando:'Déjame analizarlo con cuidado...',afirmando:'Confirmado. Voy a continuar.',enojada:'Voy a mantener la calma y revisar los datos.',trabajando:'Estoy trabajando en ello...',trabajandoen:'Sigo trabajando en tu solicitud.',desorientada:'Necesito ordenar la información antes de responder.',conspiraciones:'Estoy comparando las posibles conexiones.',idea:'Tengo una idea para resolverlo.',inventando:'Estoy construyendo una alternativa.',jugando:'Podemos explorar esto juntos.',magia:'Voy a intentar algo diferente.',nada:'No encontré nada concluyente todavía.',no:'No puedo confirmarlo aún.',puedeser:'Puede ser; necesito verificarlo.',tenga:'Ten en cuenta este punto.',neutro:'Entiendo. Dime más, por favor.'};
+const labels={neutro:'neutra',feliz:'feliz',pensando:'pensando',afirmando:'afirmando',enojada:'enojada',explicando:'explicando',trabajando:'trabajando',trabajandoen:'trabajando en',desorientada:'desorientada',conspiraciones:'conspiraciones',idea:'idea',inventando:'inventando',jugando:'jugando',magia:'magia',nada:'nada',no:'no',puedeser:'puede ser',tenga:'tenga'};
+const replies={feliz:'¡Claro que sí! Me encanta ayudarte.',pensando:'Déjame analizarlo con cuidado...',afirmando:'Confirmado. Voy a continuar.',enojada:'Voy a mantener la calma y revisar los datos.',explicando:'Te lo explico paso a paso.',trabajando:'Estoy trabajando en ello...',trabajandoen:'Sigo trabajando en tu solicitud.',desorientada:'Necesito ordenar la información antes de responder.',conspiraciones:'Estoy comparando las posibles conexiones.',idea:'Tengo una idea para resolverlo.',inventando:'Estoy construyendo una alternativa.',jugando:'Podemos explorar esto juntos.',magia:'Voy a intentar algo diferente.',nada:'No encontré nada concluyente todavía.',no:'No puedo confirmarlo aún.',puedeser:'Puede ser; necesito verificarlo.',tenga:'Ten en cuenta este punto.',neutro:'Entiendo. Dime más, por favor.'};
 const videoA=document.querySelector('#videoA'),videoB=document.querySelector('#videoB'),fallback=document.querySelector('#fallback'),answer=document.querySelector('#answer'),status=document.querySelector('#status');let active=videoA,standby=videoB,current='neutro',token=0;
 function printStatus(s){status.textContent='● conectada · '+s}function pick(a){return a[Math.floor(Math.random()*a.length)]}
-function emotionFor(message){const m=message.toLowerCase();if(/hola|gracias|genial|excelente/.test(m))return'feliz';if(/no puedo|error|\bmal\b|enoja/.test(m))return'enojada';if(/idea|crear|diseña|inventa/.test(m))return'idea';if(/jugar|juego/.test(m))return'jugando';if(/conspira|conexión|relación/.test(m))return'conspiraciones';if(/trabaja|procesa|analiza|revisa/.test(m))return'trabajando';if(/sí|exacto|correcto|confirm/.test(m))return'afirmando';if(/cómo|por qué|qué|puedes/.test(m))return'pensando';return'neutro'}
+function emotionFor(message){const m=message.toLowerCase();if(/hola|gracias|genial|excelente|feliz|alegra/.test(m))return'feliz';if(/no puedo|error|\bmal\b|enoja|molesta/.test(m))return'enojada';if(/explica|explicando|paso a paso|detalla/.test(m))return'explicando';if(/idea|crear|diseña|inventa|imagina/.test(m))return'idea';if(/jugar|juego|divertir/.test(m))return'jugando';if(/conspira|conexión|relación|vínculo/.test(m))return'conspiraciones';if(/trabaja|procesa|analiza|revisa|espera|cargando/.test(m))return'trabajando';if(/sí|exacto|correcto|confirm/.test(m))return'afirmando';if(/cómo|por qué|qué|puedes|duda|entiendes/.test(m))return'pensando';return'neutro'}
 function switchClip(emotion){
   const wanted=clips[emotion]||clips.neutro;
   const myToken=++token, next=standby;
-  let fallbackTried=false;
+  let fallbackTried=false, promoted=false;
   next.oncanplay=()=>{
-    if(myToken!==token)return;
+    if(myToken!==token||promoted)return;
+    promoted=true;
     next.play().catch(()=>{});
-    next.classList.add('active'); active.classList.remove('active');
-    const old=active; active=next; standby=old; fallback.classList.add('hide');
-    setTimeout(()=>{old.pause();old.removeAttribute('src');old.load()},300);
+    const old=active; next.classList.add('active'); old.classList.remove('active');
+    active=next; standby=old; fallback.classList.add('hide');
+    // Mantener el video anterior cargado evita pantallas negras al cambiar de emoción.
+    // Se pausa después del fundido, pero nunca se destruye su fuente ni se recorta el clip.
+    setTimeout(()=>old.pause(),320);
     printStatus(labels[emotion]||emotion);
   };
   next.onerror=()=>{
     if(myToken!==token)return;
     if(wanted!==clips.neutro&&!fallbackTried){fallbackTried=true;next.onerror=null;next.src=clips.neutro;next.load();return;}
-    fallback.classList.remove('hide'); printStatus('video no disponible · modo visual');
+    // Solo mostrar el estado visual si tampoco hay un video activo; Lucy nunca desaparece.
+    if(active.readyState<2){fallback.classList.remove('hide'); printStatus('modo visual · respaldo activo');}
   };
   next.src=wanted; next.load();
 }
@@ -87,7 +91,7 @@ const Hermes=(()=>{
   function ordered(){const last=localStorage.getItem('hermes_last_active')||'';const now=Date.now();return providers().filter(p=>p.enabled&&p.endpoint&&Number(localStorage.getItem('hermes_down_'+p.id)||0)<=now).sort((a,b)=>((a.id===last)?-1000:0)+(a.priority||99)-((b.id===last)?-1000:0)-(b.priority||99))}
   function save(item){memory.push(item);if(memory.length>8)memory.shift()}
   function local(message){const emotion=emotionFor(message);const result={emotion,reply:replies[emotion]||replies.neutro,source:'local'};save({message,...result,at:Date.now()});logEvent('fallback_local',{emotion});printStatus('Hermes local · respaldo');return result}
-  async function callProvider(p,message){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),9000);try{
+  async function callProvider(p,message){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),4500);try{
     const r=await fetch(p.endpoint,{method:'POST',signal:controller.signal,headers:{'Content-Type':'application/json',...(p.key?{Authorization:'Bearer '+p.key}:{})},body:JSON.stringify({model:p.model,messages:[{role:'system',content:'Eres Hermes, el cerebro de Lucy. Responde en español y sé breve. Devuelve JSON válido con reply y emotion. emotion debe ser una de: feliz, pensando, afirmando, enojada, trabajando, idea, inventando, jugando, magia, desorientada, conspiraciones, nada, no, puedeser, tenga, neutro.'},...memory.slice(-6).map(x=>({role:'user',content:x.message})),{role:'user',content:message}],temperature:.4})});
     if(!r.ok)throw Error('HTTP '+r.status);const data=await r.json();const raw=data.choices?.[0]?.message?.content||data.reply||data.response||'';let parsed;try{parsed=JSON.parse(raw.replace(/^```json|```$/g,'').trim())}catch(_){parsed={reply:raw,emotion:'neutro'}};return {reply:String(parsed.reply||'Entendido.'),emotion:clips[parsed.emotion]?parsed.emotion:'neutro',source:p.name};
   }finally{clearTimeout(timer)}}
@@ -99,7 +103,7 @@ const Hermes=(()=>{
 function terminal(){const command=prompt('TERMINAL HERMES HÍBRIDA\nComandos:\n ai setup  agregar proveedor\n ai auto   activar failover automático\n ai status  ver proveedores\n ai test    probar conexiones\n ai logs    ver errores y cambios de proveedor\n ai clearlogs borrar registros\n ai reset   volver a proveedores locales\n\nEscribe un comando:');if(!command)return;const c=command.trim().toLowerCase();if(c==='ai setup'){
   const name=prompt('Nombre del proveedor (ej. Hermes, Ollama, OpenRouter):');if(!name)return;const endpoint=prompt('Endpoint OpenAI-compatible completo:', 'https://');if(!endpoint||endpoint==='https://')return;const model=prompt('Modelo:', 'qwen2:0.5b')||'qwen2:0.5b';const key=prompt('API key (opcional para servicios locales; se guarda en este dispositivo):')||'';const priority=Number(prompt('Prioridad (1 es la primera):','1'))||1;Hermes.add({id:name.toLowerCase().replace(/[^a-z0-9]+/g,'-'),name,endpoint,model,key,enabled:true,priority});alert(name+' agregado. Lucy lo probará automáticamente y cambiará al siguiente si falla.');printStatus('failover activo');
 }else if(c==='ai auto'){alert('Failover automático activo. Hermes probará los proveedores por prioridad y usará el primero disponible; si todos fallan usará el cerebro local.');printStatus('failover automático');}else if(c==='ai status'){const list=Hermes.providers();alert(list.map((p,i)=>(i+1)+'. '+p.name+' · '+p.model+' · prioridad '+p.priority+' · '+(p.enabled?'activo':'apagado')).join('\n')+'\n\nRespaldo local: siempre activo');}else if(c==='ai test'){printStatus('probando proveedores');Hermes.test().then(x=>alert(x.join('\n')+'\n\nRespaldo local: OK'));}else if(c==='ai logs'){const logs=Hermes.logs();alert(logs.length?logs.slice(-20).join('\n'):'No hay logs guardados.');}else if(c==='ai clearlogs'){Hermes.clearLogs();alert('Logs eliminados.');}else if(c==='ai reset'){localStorage.removeItem('hermes_providers');Hermes.resetHealth();alert('Se restauraron Ollama y LM Studio como proveedores locales. El respaldo local sigue activo.');printStatus('híbrido local')}else alert('Comando no reconocido. Usa ai setup, ai auto, ai status, ai test o ai reset');}
-document.querySelector('#form').addEventListener('submit',handleSubmit);document.querySelector('#menu').addEventListener('click',terminal);videoA.src=clips.neutro;videoA.oncanplay=()=>{videoA.play().catch(()=>{});fallback.classList.add('hide');printStatus('Hermes local · listo')};videoA.onerror=()=>{fallback.classList.remove('hide');printStatus('video no disponible · modo visual')};videoA.load();
+document.querySelector('#form').addEventListener('submit',handleSubmit);document.querySelector('#menu').addEventListener('click',terminal);videoA.src=clips.neutro;videoA.oncanplay=()=>{videoA.play().catch(()=>{});fallback.classList.add('hide');printStatus('Hermes local · listo')};videoA.onerror=()=>{if(videoB.readyState<2){fallback.classList.remove('hide');printStatus('modo visual · respaldo activo')}};videoA.load();
 </script>
 </body>
 </html>
