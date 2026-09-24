@@ -1,4 +1,10 @@
 # Lucy
+
+<p align="center">
+  <a href="https://github.com/dcg0/Lucy/actions/workflows/security.yml"><img src="https://github.com/dcg0/Lucy/actions/workflows/security.yml/badge.svg" alt="Security checks"></a>
+  <a href="https://github.com/dcg0/Lucy/security"><img src="https://img.shields.io/badge/security-policy-available-176b46" alt="Security policy available"></a>
+</p>
+
 https://github.com/dcg0/Lucy/issues/1#issue-5460081524
 🔗https://dcg0.github.io/Lucy/
 
